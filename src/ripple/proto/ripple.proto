@@ -1,5 +1,4 @@
-syntax = "proto2";
-package protocol;
+syntax = "proto2";package protocol;
 
 enum MessageType
 {
@@ -17,6 +16,8 @@ enum MessageType
     mtPROPOSE_LEDGER        = 33;
     mtSTATUS_CHANGE         = 34;
     mtHAVE_SET              = 35;
+	mtGET_TABLE             = 36;
+	mtTABLE_DATA            = 37;
     mtVALIDATION            = 41;
     mtGET_OBJECTS           = 42;
 
@@ -45,9 +46,9 @@ message TMManifest
 message TMManifests
 {
     repeated TMManifest list = 1;
-
     // The manifests sent when a peer first connects to another peer are `history`.
-    optional bool history = 2 [deprecated=true];
+    // The receiving peer does not forward them.
+    optional bool history = 2 [default = false];
 }
 
 //------------------------------------------------------------------------------
@@ -297,6 +298,7 @@ enum TMLedgerInfoType
     liTX_NODE       = 1;        // transaction node
     liAS_NODE       = 2;        // account state node
     liTS_CANDIDATE  = 3;        // candidate transaction set
+    liSKIP_NODE     = 4;
 }
 
 enum TMLedgerType
@@ -323,6 +325,18 @@ message TMGetLedger
     optional uint32 queryDepth      = 8;    // How deep to go, number of extra levels
 }
 
+message TMGetTable
+{
+    required uint32 ledgerSeq       = 1;	
+    optional bytes ledgerHash       = 2;
+    required uint32 ledgerCheckSeq  = 3;	
+    optional bytes ledgerCheckHash  = 4;  
+    required bytes tablename        = 5;
+    required bytes account          = 6;
+    optional uint32 ledgerStopSeq   = 7;     
+    required bool getLost           = 8;
+}
+
 enum TMReplyError
 {
     reNO_LEDGER                     = 1;    // We don't have the ledger you are asking about
@@ -337,6 +351,19 @@ message TMLedgerData
     repeated TMLedgerNode nodes     = 4;
     optional uint32 requestCookie   = 5;
     optional TMReplyError error     = 6;
+}
+
+message TMTableData
+{
+    required uint32       ledgerSeq           = 1;
+    required bytes        ledgerHash          = 2;
+    required bytes        ledgerCheckHash     = 3;
+    required uint32       lastLedgerSeq       = 4;
+    required bytes        lastLedgerHash      = 5;
+    required bytes        tablename           = 6;
+    required bytes        account             = 7;
+    repeated TMLedgerNode txNodes             = 8;
+    required bool         seekStop            = 9;
 }
 
 message TMPing

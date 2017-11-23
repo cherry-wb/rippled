@@ -33,8 +33,7 @@ TxFormats::TxFormats ()
         << SOElement (sfTransferRate,        SOE_OPTIONAL)
         << SOElement (sfSetFlag,             SOE_OPTIONAL)
         << SOElement (sfClearFlag,           SOE_OPTIONAL)
-        << SOElement (sfTickSize,            SOE_OPTIONAL)
-        ;
+        << SOElement (sfTickSize,            SOE_OPTIONAL)        ;
 
     add ("TrustSet", ttTRUST_SET)
         << SOElement (sfLimitAmount,         SOE_OPTIONAL)
@@ -80,6 +79,7 @@ TxFormats::TxFormats ()
         SOElement (sfOfferSequence,       SOE_REQUIRED) <<
         SOElement (sfFulfillment,         SOE_OPTIONAL) <<
         SOElement (sfCondition,           SOE_OPTIONAL);
+        //SOElement (sfProof,               SOE_OPTIONAL);
 
     add ("EscrowCancel", ttESCROW_CANCEL) <<
         SOElement (sfOwner,               SOE_REQUIRED) <<
@@ -133,6 +133,24 @@ TxFormats::TxFormats ()
             SOElement (sfBalance,           SOE_OPTIONAL) <<
             SOElement (sfSignature,         SOE_OPTIONAL) <<
             SOElement (sfPublicKey,         SOE_OPTIONAL);
+
+    add("TableListSet", ttTABLELISTSET)
+        << SOElement(sfTables, SOE_REQUIRED)
+        << SOElement(sfTableNewName, SOE_OPTIONAL)
+        << SOElement(sfNameInDB, SOE_OPTIONAL)
+        << SOElement(sfUser, SOE_OPTIONAL)
+        << SOElement(sfRaw, SOE_OPTIONAL)
+        << SOElement(sfOpType, SOE_REQUIRED)
+        ;
+
+    add("SQLStatement", ttSQLSTATEMENT)
+        << SOElement(sfOwner, SOE_REQUIRED)
+        << SOElement(sfTables, SOE_REQUIRED)
+        << SOElement(sfNameInDB, SOE_OPTIONAL)
+        << SOElement(sfRaw, SOE_REQUIRED)
+        << SOElement(sfOpType, SOE_REQUIRED)
+        << SOElement(sfAutoFillField, SOE_OPTIONAL)
+        ;
 }
 
 void TxFormats::addCommonFields (Item& item)

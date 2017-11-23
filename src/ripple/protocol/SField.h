@@ -39,6 +39,7 @@ Some fields have a different meaning for their
 
 // Forwards
 class STAccount;
+class STEntry;
 class STAmount;
 class STBlob;
 template <std::size_t>
@@ -63,6 +64,8 @@ enum SerializedTypeID
     STI_AMOUNT = 6,
     STI_VL = 7,
     STI_ACCOUNT = 8,
+
+    STI_ENTRY = 9,
     // 9-13 are reserved
     STI_OBJECT = 14,
     STI_ARRAY = 15,
@@ -313,6 +316,7 @@ using SF_U128 = TypedField<STBitString<128>>;
 using SF_U160 = TypedField<STBitString<160>>;
 using SF_U256 = TypedField<STBitString<256>>;
 using SF_Account = TypedField<STAccount>;
+using SF_Entry = TypedField<STEntry>;
 using SF_Amount = TypedField<STAmount>;
 using SF_Blob = TypedField<STBlob>;
 using SF_Vec256 = TypedField<STVector256>;
@@ -331,11 +335,11 @@ extern SF_U8 const sfCloseResolution;
 extern SF_U8 const sfMethod;
 extern SF_U8 const sfTransactionResult;
 extern SF_U8 const sfTickSize;
-
 // 16-bit integers
 extern SF_U16 const sfLedgerEntryType;
 extern SF_U16 const sfTransactionType;
 extern SF_U16 const sfSignerWeight;
+extern SF_U16 const sfOpType;
 
 // 32-bit integers (common)
 extern SF_U32 const sfFlags;
@@ -351,6 +355,9 @@ extern SF_U32 const sfTransferRate;
 extern SF_U32 const sfWalletSize;
 extern SF_U32 const sfOwnerCount;
 extern SF_U32 const sfDestinationTag;
+extern SF_U32 const sfTableFlags;
+extern SF_U32 const sfTxnLgrSeq;
+
 
 // 32-bit integers (uncommon)
 extern SF_U32 const sfHighQualityIn;
@@ -388,9 +395,9 @@ extern SF_U64 const sfExchangeRate;
 extern SF_U64 const sfLowNode;
 extern SF_U64 const sfHighNode;
 extern SF_U64 const sfDestinationNode;
-
 // 128-bit
 extern SF_U128 const sfEmailHash;
+extern SF_U160 const sfNameInDB;
 
 // 160-bit (common)
 extern SF_U160 const sfTakerPaysCurrency;
@@ -408,7 +415,8 @@ extern SF_U256 const sfLedgerIndex;
 extern SF_U256 const sfWalletLocator;
 extern SF_U256 const sfRootIndex;
 extern SF_U256 const sfAccountTxnID;
-
+extern SF_U256 const sfPrevTxnLedgerHash;
+extern SF_U256 const sfTxnLedgerHash;
 // 256-bit (uncommon)
 extern SF_U256 const sfBookDirectory;
 extern SF_U256 const sfInvoiceID;
@@ -418,7 +426,6 @@ extern SF_U256 const sfTicketID;
 extern SF_U256 const sfDigest;
 extern SF_U256 const sfPayChannel;
 extern SF_U256 const sfConsensusHash;
-
 // currency amount (common)
 extern SF_Amount const sfAmount;
 extern SF_Amount const sfBalance;
@@ -450,12 +457,15 @@ extern SF_Blob const sfCreateCode;
 extern SF_Blob const sfMemoType;
 extern SF_Blob const sfMemoData;
 extern SF_Blob const sfMemoFormat;
-
+extern SF_Blob const sfTableNewName;
+extern SF_Blob const sfTableName;
+extern SF_Blob const sfRaw;
+extern SF_Blob const sfAutoFillField;
 // variable length (uncommon)
+extern SF_Blob const sfProof;
 extern SF_Blob const sfFulfillment;
 extern SF_Blob const sfCondition;
 extern SF_Blob const sfMasterSignature;
-
 // account
 extern SF_Account const sfAccount;
 extern SF_Account const sfOwner;
@@ -463,6 +473,8 @@ extern SF_Account const sfDestination;
 extern SF_Account const sfIssuer;
 extern SF_Account const sfTarget;
 extern SF_Account const sfRegularKey;
+extern SF_Account const sfUser;
+extern SF_Entry const sfEntry;
 
 // path set
 extern SField const sfPaths;
@@ -471,6 +483,8 @@ extern SField const sfPaths;
 extern SF_Vec256 const sfIndexes;
 extern SF_Vec256 const sfHashes;
 extern SF_Vec256 const sfAmendments;
+extern SF_Vec256 const sfTxs;
+
 
 // inner object
 // OBJECT/1 is reserved for end of object
@@ -484,6 +498,7 @@ extern SField const sfNewFields;
 extern SField const sfTemplateEntry;
 extern SField const sfMemo;
 extern SField const sfSignerEntry;
+extern SField const sfTable;
 extern SField const sfSigner;
 extern SField const sfMajority;
 
@@ -498,7 +513,9 @@ extern SField const sfSufficient;
 extern SField const sfAffectedNodes;
 extern SField const sfMemos;
 extern SField const sfMajorities;
-
+extern SField const sfTableEntries;
+extern SField const sfTables;
+extern SField const sfUsers;
 //------------------------------------------------------------------------------
 
 } // ripple

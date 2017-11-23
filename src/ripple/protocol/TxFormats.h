@@ -52,10 +52,12 @@ enum TxType
     ttPAYCHAN_CLAIM     = 15,
 
     ttTRUST_SET         = 20,
-
+    ttTABLELISTSET      = 21,
+    ttSQLSTATEMENT      = 22,
     ttAMENDMENT         = 100,
     ttFEE               = 101,
 };
+
 
 /** Manages the list of known transaction formats.
 */

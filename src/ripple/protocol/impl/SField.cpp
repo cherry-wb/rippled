@@ -84,11 +84,11 @@ SF_U8 const sfTransactionResult = make::one<SF_U8::type>(&sfTransactionResult, S
 
 // 8-bit integers (uncommon)
 SF_U8 const sfTickSize          = make::one<SF_U8::type>(&sfTickSize,          STI_UINT8, 16, "TickSize");
-
 // 16-bit integers
 SF_U16 const sfLedgerEntryType = make::one<SF_U16::type>(&sfLedgerEntryType, STI_UINT16, 1, "LedgerEntryType", SField::sMD_Never);
 SF_U16 const sfTransactionType = make::one<SF_U16::type>(&sfTransactionType, STI_UINT16, 2, "TransactionType");
 SF_U16 const sfSignerWeight    = make::one<SF_U16::type>(&sfSignerWeight,    STI_UINT16, 3, "SignerWeight");
+SF_U16 const sfOpType          = make::one<SF_U16::type>(&sfOpType,          STI_UINT16, 4, "OpType");
 
 // 32-bit integers (common)
 SF_U32 const sfFlags             = make::one<SF_U32::type>(&sfFlags,             STI_UINT32,  2, "Flags");
@@ -104,6 +104,7 @@ SF_U32 const sfTransferRate      = make::one<SF_U32::type>(&sfTransferRate,     
 SF_U32 const sfWalletSize        = make::one<SF_U32::type>(&sfWalletSize,        STI_UINT32, 12, "WalletSize");
 SF_U32 const sfOwnerCount        = make::one<SF_U32::type>(&sfOwnerCount,        STI_UINT32, 13, "OwnerCount");
 SF_U32 const sfDestinationTag    = make::one<SF_U32::type>(&sfDestinationTag,    STI_UINT32, 14, "DestinationTag");
+SF_U32 const sfTableFlags        = make::one<SF_U32::type>(&sfTableFlags,        STI_UINT32, 15, "TableFlags");
 
 // 32-bit integers (uncommon)
 SF_U32 const sfHighQualityIn       = make::one<SF_U32::type>(&sfHighQualityIn,       STI_UINT32, 16, "HighQualityIn");
@@ -130,16 +131,17 @@ SF_U32 const sfCancelAfter         = make::one<SF_U32::type>(&sfCancelAfter,    
 SF_U32 const sfFinishAfter         = make::one<SF_U32::type>(&sfFinishAfter,         STI_UINT32, 37, "FinishAfter");
 SF_U32 const sfSignerListID        = make::one<SF_U32::type>(&sfSignerListID,        STI_UINT32, 38, "SignerListID");
 SF_U32 const sfSettleDelay         = make::one<SF_U32::type>(&sfSettleDelay,         STI_UINT32, 39, "SettleDelay");
+SF_U32 const sfTxnLgrSeq           = make::one<SF_U32::type>(&sfTxnLgrSeq,           STI_UINT32, 40, "TxnLgrSeq");
 
 // 64-bit integers
-SF_U64 const sfIndexNext        = make::one<SF_U64::type>(&sfIndexNext,        STI_UINT64, 1, "IndexNext");
-SF_U64 const sfIndexPrevious    = make::one<SF_U64::type>(&sfIndexPrevious,    STI_UINT64, 2, "IndexPrevious");
-SF_U64 const sfBookNode         = make::one<SF_U64::type>(&sfBookNode,         STI_UINT64, 3, "BookNode");
-SF_U64 const sfOwnerNode        = make::one<SF_U64::type>(&sfOwnerNode,        STI_UINT64, 4, "OwnerNode");
-SF_U64 const sfBaseFee          = make::one<SF_U64::type>(&sfBaseFee,          STI_UINT64, 5, "BaseFee");
-SF_U64 const sfExchangeRate     = make::one<SF_U64::type>(&sfExchangeRate,     STI_UINT64, 6, "ExchangeRate");
-SF_U64 const sfLowNode          = make::one<SF_U64::type>(&sfLowNode,          STI_UINT64, 7, "LowNode");
-SF_U64 const sfHighNode         = make::one<SF_U64::type>(&sfHighNode,         STI_UINT64, 8, "HighNode");
+SF_U64 const sfIndexNext     = make::one<SF_U64::type>(&sfIndexNext,     STI_UINT64, 1, "IndexNext");
+SF_U64 const sfIndexPrevious = make::one<SF_U64::type>(&sfIndexPrevious, STI_UINT64, 2, "IndexPrevious");
+SF_U64 const sfBookNode      = make::one<SF_U64::type>(&sfBookNode,      STI_UINT64, 3, "BookNode");
+SF_U64 const sfOwnerNode     = make::one<SF_U64::type>(&sfOwnerNode,     STI_UINT64, 4, "OwnerNode");
+SF_U64 const sfBaseFee       = make::one<SF_U64::type>(&sfBaseFee,       STI_UINT64, 5, "BaseFee");
+SF_U64 const sfExchangeRate  = make::one<SF_U64::type>(&sfExchangeRate,  STI_UINT64, 6, "ExchangeRate");
+SF_U64 const sfLowNode       = make::one<SF_U64::type>(&sfLowNode,       STI_UINT64, 7, "LowNode");
+SF_U64 const sfHighNode      = make::one<SF_U64::type>(&sfHighNode,      STI_UINT64, 8, "HighNode");
 SF_U64 const sfDestinationNode  = make::one<SF_U64::type>(&sfDestinationNode,  STI_UINT64, 9, "DestinationNode");
 
 // 128-bit
@@ -150,17 +152,19 @@ SF_U160 const sfTakerPaysCurrency = make::one<SF_U160::type>(&sfTakerPaysCurrenc
 SF_U160 const sfTakerPaysIssuer   = make::one<SF_U160::type>(&sfTakerPaysIssuer,   STI_HASH160, 2, "TakerPaysIssuer");
 SF_U160 const sfTakerGetsCurrency = make::one<SF_U160::type>(&sfTakerGetsCurrency, STI_HASH160, 3, "TakerGetsCurrency");
 SF_U160 const sfTakerGetsIssuer   = make::one<SF_U160::type>(&sfTakerGetsIssuer,   STI_HASH160, 4, "TakerGetsIssuer");
-
+SF_U160 const sfNameInDB          = make::one<SF_U160::type>(&sfNameInDB,          STI_HASH160, 5, "NameInDB");
 // 256-bit (common)
-SF_U256 const sfLedgerHash      = make::one<SF_U256::type>(&sfLedgerHash,      STI_HASH256, 1, "LedgerHash");
-SF_U256 const sfParentHash      = make::one<SF_U256::type>(&sfParentHash,      STI_HASH256, 2, "ParentHash");
-SF_U256 const sfTransactionHash = make::one<SF_U256::type>(&sfTransactionHash, STI_HASH256, 3, "TransactionHash");
-SF_U256 const sfAccountHash     = make::one<SF_U256::type>(&sfAccountHash,     STI_HASH256, 4, "AccountHash");
-SF_U256 const sfPreviousTxnID   = make::one<SF_U256::type>(&sfPreviousTxnID,   STI_HASH256, 5, "PreviousTxnID", SField::sMD_DeleteFinal);
-SF_U256 const sfLedgerIndex     = make::one<SF_U256::type>(&sfLedgerIndex,     STI_HASH256, 6, "LedgerIndex");
-SF_U256 const sfWalletLocator   = make::one<SF_U256::type>(&sfWalletLocator,   STI_HASH256, 7, "WalletLocator");
-SF_U256 const sfRootIndex       = make::one<SF_U256::type>(&sfRootIndex,       STI_HASH256, 8, "RootIndex", SField::sMD_Always);
-SF_U256 const sfAccountTxnID    = make::one<SF_U256::type>(&sfAccountTxnID,    STI_HASH256, 9, "AccountTxnID");
+SF_U256 const sfLedgerHash        = make::one<SF_U256::type>(&sfLedgerHash,      STI_HASH256, 1, "LedgerHash");
+SF_U256 const sfParentHash        = make::one<SF_U256::type>(&sfParentHash,      STI_HASH256, 2, "ParentHash");
+SF_U256 const sfTransactionHash   = make::one<SF_U256::type>(&sfTransactionHash, STI_HASH256, 3, "TransactionHash");
+SF_U256 const sfAccountHash       = make::one<SF_U256::type>(&sfAccountHash,     STI_HASH256, 4, "AccountHash");
+SF_U256 const sfPreviousTxnID     = make::one<SF_U256::type>(&sfPreviousTxnID,   STI_HASH256, 5, "PreviousTxnID", SField::sMD_DeleteFinal);
+SF_U256 const sfLedgerIndex       = make::one<SF_U256::type>(&sfLedgerIndex,     STI_HASH256, 6, "LedgerIndex");
+SF_U256 const sfWalletLocator     = make::one<SF_U256::type>(&sfWalletLocator,   STI_HASH256, 7, "WalletLocator");
+SF_U256 const sfRootIndex         = make::one<SF_U256::type>(&sfRootIndex,       STI_HASH256, 8, "RootIndex", SField::sMD_Always);
+SF_U256 const sfAccountTxnID      = make::one<SF_U256::type>(&sfAccountTxnID,    STI_HASH256, 9, "AccountTxnID");
+SF_U256 const sfPrevTxnLedgerHash = make::one<SF_U256::type>(&sfPrevTxnLedgerHash, STI_HASH256, 10, "PrevTxnLedgerHash");
+SF_U256 const sfTxnLedgerHash     = make::one<SF_U256::type>(&sfTxnLedgerHash, STI_HASH256, 11, "TxnLedgerHash");
 
 // 256-bit (uncommon)
 SF_U256 const sfBookDirectory = make::one<SF_U256::type>(&sfBookDirectory, STI_HASH256, 16, "BookDirectory");
@@ -204,12 +208,17 @@ SF_Blob const sfMemoType        = make::one<SF_Blob::type>(&sfMemoType,      STI
 SF_Blob const sfMemoData        = make::one<SF_Blob::type>(&sfMemoData,      STI_VL, 13, "MemoData");
 SF_Blob const sfMemoFormat      = make::one<SF_Blob::type>(&sfMemoFormat,    STI_VL, 14, "MemoFormat");
 
-
+// variable length (uncommon)
+//                                                                                   16 has not been used yet...
+SF_Blob const sfProof          = make::one<SF_Blob::type>(&sfProof,          STI_VL, 17, "Proof");
+SF_Blob const sfTableName      = make::one<SF_Blob::type>(&sfTableName,      STI_VL, 19, "TableName");
+SF_Blob const sfRaw            = make::one<SF_Blob::type>(&sfRaw,            STI_VL, 20, "Raw");
+SF_Blob const sfTableNewName   = make::one<SF_Blob::type>(&sfTableNewName,   STI_VL, 21, "TableNewName");
+SF_Blob const sfAutoFillField  = make::one<SF_Blob::type>(&sfAutoFillField,  STI_VL, 22, "AutoFillField");
 // variable length (uncommon)
 SF_Blob const sfFulfillment     = make::one<SF_Blob::type>(&sfFulfillment,     STI_VL, 16, "Fulfillment");
 SF_Blob const sfCondition       = make::one<SF_Blob::type>(&sfCondition,       STI_VL, 17, "Condition");
 SF_Blob const sfMasterSignature = make::one<SF_Blob::type>(&sfMasterSignature, STI_VL, 18, "MasterSignature", SField::sMD_Default, SField::notSigning);
-
 
 // account
 SF_Account const sfAccount     = make::one<SF_Account::type>(&sfAccount,     STI_ACCOUNT, 1, "Account");
@@ -218,7 +227,9 @@ SF_Account const sfDestination = make::one<SF_Account::type>(&sfDestination, STI
 SF_Account const sfIssuer      = make::one<SF_Account::type>(&sfIssuer,      STI_ACCOUNT, 4, "Issuer");
 SF_Account const sfTarget      = make::one<SF_Account::type>(&sfTarget,      STI_ACCOUNT, 7, "Target");
 SF_Account const sfRegularKey  = make::one<SF_Account::type>(&sfRegularKey,  STI_ACCOUNT, 8, "RegularKey");
+SF_Account const sfUser        = make::one<SF_Account::type>(&sfUser,        STI_ACCOUNT, 9, "User");
 
+SF_Entry const sfEntry         = make::one<SF_Entry::type>(&sfEntry, STI_ENTRY, 1, "Entry");
 // path set
 SField const sfPaths = make::one(&sfPaths, STI_PATHSET, 1, "Paths");
 
@@ -226,7 +237,7 @@ SField const sfPaths = make::one(&sfPaths, STI_PATHSET, 1, "Paths");
 SF_Vec256 const sfIndexes    = make::one<SF_Vec256::type>(&sfIndexes,    STI_VECTOR256, 1, "Indexes", SField::sMD_Never);
 SF_Vec256 const sfHashes     = make::one<SF_Vec256::type>(&sfHashes,     STI_VECTOR256, 2, "Hashes");
 SF_Vec256 const sfAmendments = make::one<SF_Vec256::type>(&sfAmendments, STI_VECTOR256, 3, "Amendments");
-
+SF_Vec256 const sfTxs        = make::one<SF_Vec256::type>(&sfTxs,        STI_VECTOR256, 4, "Txs");
 // inner object
 // OBJECT/1 is reserved for end of object
 SField const sfTransactionMetaData = make::one(&sfTransactionMetaData, STI_OBJECT,  2, "TransactionMetaData");
@@ -239,6 +250,7 @@ SField const sfNewFields           = make::one(&sfNewFields,           STI_OBJEC
 SField const sfTemplateEntry       = make::one(&sfTemplateEntry,       STI_OBJECT,  9, "TemplateEntry");
 SField const sfMemo                = make::one(&sfMemo,                STI_OBJECT, 10, "Memo");
 SField const sfSignerEntry         = make::one(&sfSignerEntry,         STI_OBJECT, 11, "SignerEntry");
+SField const sfTable               = make::one(&sfTable,               STI_OBJECT, 12, "Table");
 
 // inner object (uncommon)
 SField const sfSigner              = make::one(&sfSigner,              STI_OBJECT, 16, "Signer");
@@ -255,6 +267,9 @@ SField const sfNecessary       = make::one(&sfNecessary,       STI_ARRAY, 6, "Ne
 SField const sfSufficient      = make::one(&sfSufficient,      STI_ARRAY, 7, "Sufficient");
 SField const sfAffectedNodes   = make::one(&sfAffectedNodes,   STI_ARRAY, 8, "AffectedNodes");
 SField const sfMemos           = make::one(&sfMemos,           STI_ARRAY, 9, "Memos");
+SField const sfTableEntries    = make::one(&sfTableEntries,    STI_ARRAY, 10,"TableEntries");
+SField const sfTables          = make::one(&sfTables,          STI_ARRAY, 11, "Tables");
+SField const sfUsers           = make::one(&sfUsers,           STI_ARRAY, 12, "Users");
 
 // array of objects (uncommon)
 SField const sfMajorities      = make::one(&sfMajorities,      STI_ARRAY, 16, "Majorities");
